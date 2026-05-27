@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>אודות — לידור גבאי</title>
+<meta name="description" content="הסיפור של לידור גבאי — אזרח שעבר את תהליך רישיון הנשק ועוזר לאחרים לעשות את אותו הדבר.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300&family=Frank+Ruhl+Libre:wght@300;400;700;900&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --gold:#C9963A;--gold-light:#E0B05A;--gold-dark:#A07828;
+  --gold-glow:rgba(201,150,58,0.25);
+  --dark:#080808;--dark-2:#0D0D0D;
+  --surface:rgba(255,255,255,0.04);--border:rgba(201,150,58,0.18);
+  --cream:#F2EDE4;--cream-dim:#B09878;
+  --font-display:'Frank Ruhl Libre','Cormorant Garamond',serif;
+  --font-body:'Heebo',sans-serif;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{direction:rtl;scroll-behavior:smooth;}
+body{background:var(--dark);color:var(--cream);font-family:var(--font-body);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{text-decoration:none;color:inherit;}
+img{display:block;max-width:100%;}
+
+/* grain */
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:.5;}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:0 clamp(24px,5vw,80px);
+  height:72px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(8,8,8,0.9);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-brand{display:flex;flex-direction:column;gap:2px;}
+.nav-name{font-family:var(--font-display);font-size:1.15rem;font-weight:700;
+  background:linear-gradient(135deg,var(--gold-dark),var(--gold-light));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.nav-sub{font-size:.7rem;color:var(--cream-dim);letter-spacing:.12em;}
+.nav-links{display:flex;align-items:center;gap:clamp(16px,3vw,40px);}
+.nav-link{font-size:.82rem;color:var(--cream-dim);letter-spacing:.08em;transition:color .2s;position:relative;padding-bottom:2px;}
+.nav-link::after{content:'';position:absolute;bottom:0;right:0;left:0;height:1px;background:var(--gold);transform:scaleX(0);transform-origin:right;transition:transform .3s;}
+.nav-link:hover{color:var(--cream);}
+.nav-link:hover::after,.nav-link.active::after{transform:scaleX(1);}
+.nav-link.active{color:var(--gold);}
+.nav-cta{
+  font-size:.82rem;font-weight:600;letter-spacing:.08em;
+  border:1px solid var(--gold);color:var(--gold);
+  padding:8px 22px;border-radius:2px;transition:all .25s;
+}
+.nav-cta:hover{background:var(--gold);color:var(--dark);}
+@media(max-width:640px){
+  .nav-links{gap:12px;}
+  .nav-link:not(.nav-cta){display:none;}
+}
+
+/* ── HERO ── */
+.about-hero{
+  min-height:55vh;
+  padding:140px clamp(24px,8vw,160px) 80px;
+  display:flex;align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+.about-hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 60% 80% at 80% 50%,rgba(201,150,58,.1) 0%,transparent 65%),
+    radial-gradient(ellipse 40% 60% at 10% 80%,rgba(201,150,58,.06) 0%,transparent 60%);
+}
+.hero-content{position:relative;max-width:700px;}
+.hero-eyebrow{
+  font-size:.75rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;
+  font-weight:700;margin-bottom:24px;
+  display:flex;align-items:center;gap:12px;
+}
+.hero-eyebrow::before{content:'';width:32px;height:1px;background:var(--gold);}
+.about-title{
+  font-family:var(--font-display);font-size:clamp(52px,7vw,96px);
+  font-weight:900;line-height:1.0;color:var(--cream);margin-bottom:28px;
+}
+.about-title em{font-style:normal;color:var(--gold-light);}
+.about-intro{
+  font-size:clamp(16px,1.6vw,20px);color:var(--cream-dim);
+  line-height:1.8;max-width:560px;font-weight:300;
+}
+
+/* ── STORY SECTION ── */
+.story-section{
+  padding:100px clamp(24px,8vw,160px);
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+}
+@media(max-width:900px){.story-section{grid-template-columns:1fr;gap:48px;}}
+
+/* Photo */
+.photo-wrap{
+  position:relative;
+  aspect-ratio:3/4;
+  max-width:440px;
+}
+.photo-frame{
+  width:100%;height:100%;
+  border-radius:4px;
+  overflow:hidden;
+  position:relative;
+}
+.photo-frame img{
+  width:100%;height:100%;
+  object-fit:cover;
+  object-position:top center;
+  filter:grayscale(15%) contrast(1.05);
+}
+.photo-placeholder{
+  width:100%;height:100%;
+  background:linear-gradient(145deg,rgba(201,150,58,.06),rgba(201,150,58,.02));
+  border:1px solid var(--border);
+  border-radius:4px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:16px;color:var(--cream-dim);font-size:.9rem;letter-spacing:.1em;
+}
+.photo-placeholder span{font-size:3rem;opacity:.3;}
+/* Gold border accent */
+.photo-wrap::before{
+  content:'';position:absolute;
+  top:-12px;right:-12px;
+  width:60%;height:60%;
+  border-top:2px solid rgba(201,150,58,.35);
+  border-right:2px solid rgba(201,150,58,.35);
+  border-radius:2px;
+  z-index:-1;
+}
+.photo-wrap::after{
+  content:'';position:absolute;
+  bottom:-12px;left:-12px;
+  width:60%;height:60%;
+  border-bottom:2px solid rgba(201,150,58,.2);
+  border-left:2px solid rgba(201,150,58,.2);
+  border-radius:2px;
+  z-index:-1;
+}
+.photo-badge{
+  position:absolute;
+  bottom:-20px;left:-20px;
+  background:var(--dark-2);
+  border:1px solid var(--border);
+  border-radius:4px;
+  padding:16px 24px;
+  display:flex;flex-direction:column;gap:4px;
+}
+.badge-num{
+  font-family:var(--font-display);font-size:2.4rem;font-weight:900;
+  color:var(--gold);line-height:1;
+}
+.badge-label{font-size:.72rem;color:var(--cream-dim);letter-spacing:.1em;}
+
+/* Story text */
+.story-text{}
+.story-tag{
+  font-size:.72rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;
+  font-weight:700;margin-bottom:20px;
+}
+.story-headline{
+  font-family:var(--font-display);font-size:clamp(28px,3.5vw,44px);
+  font-weight:900;line-height:1.15;color:var(--cream);margin-bottom:28px;
+}
+.story-headline em{font-style:normal;color:var(--gold-light);}
+.story-body{
+  font-size:clamp(15px,1.4vw,17px);color:var(--cream-dim);
+  line-height:1.9;font-weight:300;
+}
+.story-body p+p{margin-top:20px;}
+.story-body strong{color:var(--cream);font-weight:600;}
+.story-divider{
+  width:60px;height:2px;
+  background:linear-gradient(90deg,var(--gold),transparent);
+  margin:32px 0;
+}
+
+/* ── VALUES ── */
+.values-section{
+  padding:80px clamp(24px,8vw,160px) 100px;
+  background:var(--dark-2);
+  position:relative;
+}
+.values-section::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--border),transparent);
+}
+.section-header{text-align:center;margin-bottom:64px;}
+.section-eyebrow{font-size:.72rem;letter-spacing:.22em;color:var(--gold);text-transform:uppercase;font-weight:700;margin-bottom:16px;}
+.section-title{
+  font-family:var(--font-display);font-size:clamp(32px,4vw,52px);
+  font-weight:900;color:var(--cream);line-height:1.1;
+}
+.section-title em{font-style:normal;color:var(--gold-light);}
+
+.values-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:32px;
+}
+@media(max-width:768px){.values-grid{grid-template-columns:1fr;gap:24px;}}
+.value-card{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:4px;padding:40px 32px;
+  transition:border-color .3s;
+}
+.value-card:hover{border-color:rgba(201,150,58,.4);}
+.value-icon{
+  font-size:2rem;margin-bottom:20px;
+  display:block;
+  filter:drop-shadow(0 0 12px rgba(201,150,58,.4));
+}
+.value-title{
+  font-family:var(--font-display);font-size:1.3rem;font-weight:700;
+  color:var(--cream);margin-bottom:12px;
+}
+.value-body{font-size:.9rem;color:var(--cream-dim);line-height:1.75;font-weight:300;}
+
+/* ── CTA ── */
+.about-cta{
+  padding:100px clamp(24px,8vw,160px);
+  text-align:center;
+  position:relative;
+}
+.about-cta::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(201,150,58,.06) 0%,transparent 65%);
+}
+.cta-title{
+  font-family:var(--font-display);font-size:clamp(32px,4.5vw,60px);
+  font-weight:900;color:var(--cream);line-height:1.1;margin-bottom:20px;
+  position:relative;
+}
+.cta-title em{font-style:normal;color:var(--gold-light);}
+.cta-sub{font-size:1rem;color:var(--cream-dim);margin-bottom:44px;line-height:1.7;position:relative;}
+.cta-buttons{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;position:relative;}
+.btn-primary{
+  background:var(--gold);color:var(--dark);
+  font-size:.9rem;font-weight:700;letter-spacing:.06em;
+  padding:16px 40px;border-radius:2px;
+  transition:all .25s;display:inline-flex;align-items:center;gap:10px;
+}
+.btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+.btn-secondary{
+  border:1px solid var(--border);color:var(--cream);
+  font-size:.9rem;font-weight:500;letter-spacing:.06em;
+  padding:16px 40px;border-radius:2px;
+  transition:all .25s;
+}
+.btn-secondary:hover{border-color:var(--gold);color:var(--gold);}
+
+/* ── FOOTER ── */
+footer{
+  padding:40px clamp(24px,8vw,160px);
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-brand{font-family:var(--font-display);font-size:1rem;font-weight:700;color:var(--gold);}
+.footer-legal{font-size:.72rem;color:var(--cream-dim);opacity:.5;line-height:1.6;max-width:600px;}
+
+/* WhatsApp float */
+#wa-float{
+  position:fixed;bottom:28px;left:28px;z-index:900;
+  background:#25D366;border-radius:50px;
+  display:flex;align-items:center;gap:10px;
+  padding:14px 22px;font-size:.85rem;font-weight:700;
+  color:#fff;letter-spacing:.04em;
+  box-shadow:0 4px 24px rgba(37,211,102,.35);
+  transition:transform .25s,box-shadow .25s;
+}
+#wa-float:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(37,211,102,.5);}
+#wa-float svg{width:22px;height:22px;fill:#fff;flex-shrink:0;}
+@media(max-width:480px){
+  #wa-float span{display:none;}
+  #wa-float{padding:14px;border-radius:50%;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <span class="nav-name">לידור גבאי</span>
+    <span class="nav-sub">ליווי רישיון נשק</span>
+  </a>
+  <div class="nav-links">
+    <a href="about.html" class="nav-link active">אודות</a>
+    <a href="process.html" class="nav-link">התהליך</a>
+    <a href="index.html#checker" class="nav-link">בדוק זכאות</a>
+    <a href="contact.html" class="nav-cta">צור קשר</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="about-hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">הסיפור שלי</div>
+    <h1 class="about-title">
+      לא חברה.<br>
+      לא עורך דין.<br>
+      <em>בן אדם שעבר את זה.</em>
+    </h1>
+    <p class="about-intro">
+      עברתי את תהליך רישיון הנשק בעצמי — ולמדתי את כל הפינות, הטפסים, ואת הדרך הנכונה לעבור אותו.
+      מאז, אני עוזר לאנשים אחרים לעשות את אותו הדבר.
+    </p>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="story-section">
+  <!-- Photo -->
+  <div class="photo-wrap">
+    <div class="photo-frame">
+      <!--
+        להחליף את השורה הבאה בתמונה שלך:
+        <img src="lidor.jpg" alt="לידור גבאי">
+        שם הקובץ צריך להיות: lidor.jpg
+      -->
+      <div class="photo-placeholder">
+        <span>📷</span>
+        <span>תמונה תועלה בקרוב</span>
+      </div>
+    </div>
+    <div class="photo-badge">
+      <span class="badge-num">100%</span>
+      <span class="badge-label">ליווי אישי</span>
+    </div>
+  </div>
+
+  <!-- Text -->
+  <div class="story-text">
+    <div class="story-tag">הסיפור שלי</div>
+    <h2 class="story-headline">
+      כשניסיתי להוציא רישיון<br>
+      — <em>לא ידעתי מאיפה להתחיל</em>
+    </h2>
+    <div class="story-body">
+      <p>
+        כמו הרבה אנשים, ידעתי שרישיון נשק הוא דבר שאני <strong>זכאי לו</strong> — אבל כשנכנסתי לתהליך,
+        הייתי לגמרי לבד. טפסים, מסמכים, גופים שצריך לפנות אליהם...
+        אף אחד לא הסביר לי איך זה עובד באמת.
+      </p>
+      <p>
+        בסוף עברתי את זה. ובדרך גיליתי דבר אחד חשוב:
+        <strong>הרישיון לא עולה כלום — הבעיה היא שאנשים נשארים לבד עם הבירוקרטיה.</strong>
+      </p>
+      <p>
+        מאז, אני עוזר לאנשים לעבור את אותו התהליך —
+        עם כל מה שלמדתי, ובלי שיצטרכו לנווט לבד.
+      </p>
+    </div>
+    <div class="story-divider"></div>
+    <div class="story-body">
+      <p>
+        אני לא מוכר לך שירות — אני <strong>מלווה אותך</strong>.
+        יש הבדל. ועד שלא תקבל את הרישיון, אני לא זזה.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="section-header">
+    <div class="section-eyebrow">למה לבחור בי</div>
+    <h2 class="section-title">מה <em>מייחד</em> את הליווי שלי</h2>
+  </div>
+  <div class="values-grid">
+    <div class="value-card">
+      <span class="value-icon">🤝</span>
+      <div class="value-title">ליווי אישי באמת</div>
+      <p class="value-body">
+        לא שולחים אותך לאיזשהו PDF. אני זמין, עונה לשאלות, ומלווה אותך שלב אחרי שלב —
+        עד שתחזיק את הרישיון ביד.
+      </p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🛡️</span>
+      <div class="value-title">ידע מניסיון אמיתי</div>
+      <p class="value-body">
+        עברתי את התהליך בעצמי. יודע בדיוק איפה אנשים נתקעים,
+        איך להימנע מהשגיאות הנפוצות, ומה עובד.
+      </p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">💰</span>
+      <div class="value-title">שקיפות מלאה</div>
+      <p class="value-body">
+        הרישיון עצמו חינמי לחלוטין. עלות השירות שלי ברורה מראש,
+        לפני שמתחילים — בלי הפתעות.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="about-cta">
+  <h2 class="cta-title">מוכן להתחיל<br><em>את התהליך שלך?</em></h2>
+  <p class="cta-sub">ייעוץ ראשוני חינם. אגיד לך בדיוק מה המצב שלך — ללא התחייבות.</p>
+  <div class="cta-buttons">
+    <a href="https://wa.me/972544864131?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%9C%D7%99%D7%93%D7%95%D7%A8%20%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A0%D7%95%D7%A1%D7%A4%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%AA%D7%94%D7%9C%D7%99%D7%9A%20%D7%A7%D7%91%D7%9C%D7%AA%20%D7%A8%D7%99%D7%A9%D7%99%D7%95%D7%9F%20%D7%9C%D7%A0%D7%A9%D7%A7" target="_blank" class="btn-primary">
+      <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      שלח לי הודעה
+    </a>
+    <a href="index.html#checker" class="btn-secondary">בדוק זכאות →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">לידור גבאי</div>
+  <nav style="display:flex;gap:24px;">
+    <a href="about.html" style="font-size:.8rem;color:var(--cream-dim);">אודות</a>
+    <a href="process.html" style="font-size:.8rem;color:var(--cream-dim);">התהליך</a>
+    <a href="contact.html" style="font-size:.8rem;color:var(--cream-dim);">צור קשר</a>
+  </nav>
+  <p class="footer-legal">לידור גבאי אינו עורך דין. הרישיון מונפק על-ידי רשויות המדינה בלבד.</p>
+</footer>
+
+<!-- WhatsApp Float -->
+<a id="wa-float" href="https://wa.me/972544864131?text=%D7%A9%D7%9C%D7%95%D7%9D%20%D7%9C%D7%99%D7%93%D7%95%D7%A8%20%2C%20%D7%90%D7%A9%D7%9E%D7%97%20%D7%9C%D7%A9%D7%9E%D7%95%D7%A2%20%D7%A4%D7%A8%D7%98%D7%99%D7%9D%20%D7%A0%D7%95%D7%A1%D7%A4%D7%99%D7%9D%20%D7%A2%D7%9C%20%D7%AA%D7%94%D7%9C%D7%99%D7%9A%20%D7%A7%D7%91%D7%9C%D7%AA%20%D7%A8%D7%99%D7%A9%D7%99%D7%95%D7%9F%20%D7%9C%D7%A0%D7%A9%D7%A7" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <span>וואטסאפ עכשיו</span>
+</a>
+
+</body>
+</html>
